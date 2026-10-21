@@ -6,12 +6,12 @@ and validates the extracted orbital frequencies using Fourier analysis.
 """
 
 import numpy as np
-import scipy.fft as fft # type: ignore
-import scipy.signal.windows as windows # type: ignore
-import matplotlib.pyplot as plt # type: ignore
-from matplotlib.animation import FuncAnimation # type: ignore
-import astropy.units as u # type: ignore
-import astropy.constants as const # type: ignore
+import scipy.fft as fft  # type: ignore
+import scipy.signal.windows as windows  # type: ignore
+import matplotlib.pyplot as plt  # type: ignore
+from matplotlib.animation import FuncAnimation  # type: ignore
+import astropy.units as u  # type: ignore
+import astropy.constants as const  # type: ignore
 from typing import Any, Tuple, List
 animate: Any = None
 

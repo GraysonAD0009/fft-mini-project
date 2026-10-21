@@ -5,15 +5,15 @@ This module models the gravitational wobble of Pluto induced by its moons
 and validates the extracted orbital frequencies using Fourier analysis.
 """
 
-
 import numpy as np
-import scipy.fft as fft  # type: ignore
-import scipy.signal.windows as windows  # type: ignore
-import matplotlib.pyplot as plt  # type: ignore
-from matplotlib.animation import FuncAnimation  # type: ignore
-import astropy.units as u  # type: ignore
-import astropy.constants as const  # type: ignore
+import scipy.fft as fft
+import scipy.signal.windows as windows
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import astropy.units as u
+import astropy.constants as const
 from typing import Any, Tuple, List
+animate: Any = None
 
 
 def simulate_pluto_wobble(t: Any, noise_amplitude: Any = 1.5 * u.m / u.s) -> Any:
@@ -41,7 +41,7 @@ def simulate_pluto_wobble(t: Any, noise_amplitude: Any = 1.5 * u.m / u.s) -> Any
     signal_charon = v_amp_charon * np.sin(2 * np.pi * (t / period_charon).to(u.dimensionless_unscaled).value)
     signal_hydra = v_amp_hydra * np.sin(2 * np.pi * (t / period_hydra).to(u.dimensionless_unscaled).value)
 
-    np.random.seed(42) 
+    np.random.seed(42)
     noise = np.random.normal(0, noise_amplitude.value, len(t)) * noise_amplitude.unit
 
     return signal_charon + signal_hydra + noise
@@ -143,7 +143,7 @@ def animate_pluto_wobble() -> None:
 
     period = 6.387
     omega = 2 * np.pi / period
-    r_pluto = 0.2  
+    r_pluto = 0.2
     r_charon = 1.0
 
     fig, (ax_orbit, ax_plot) = plt.subplots(1, 2, figsize=(12, 5))
@@ -193,7 +193,7 @@ def animate_pluto_wobble() -> None:
 
         if t > ax_plot.get_xlim()[1]:
             ax_plot.set_xlim(t - 10, t)
- 
+
         rv_line.set_data(time_history, velocity_history)
         return pluto_dot, charon_dot, rv_line
 
@@ -244,7 +244,12 @@ def main() -> None:
     ax1.grid(True, linestyle='--')
     ax1.legend()
     ax2.plot(pos_freqs.value, pos_psd, color='crimson', linewidth=2, label='Power Spectrum')
-    ax2.axvline(detected_charon_freq.value, color='black', linestyle=':', label=f'Charon Peak ({detected_charon_freq:.3f})')
+    ax2.axvline(
+        detected_charon_freq.value, 
+        color='black', 
+        linestyle=':', 
+        label=f'Charon Peak ({detected_charon_freq:.3f})'
+    )
     ax2.set_xlim(0, 0.3)
     ax2.set_xlabel("Frequency (1/day)")
     ax2.set_ylabel("Spectral Power")

@@ -6,12 +6,12 @@ and validates the extracted orbital frequencies using Fourier analysis.
 """
 
 import numpy as np
-import scipy.fft as fft
-import scipy.signal.windows as windows
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-import astropy.units as u
-import astropy.constants as const
+import scipy.fft as fft # type: ignore
+import scipy.signal.windows as windows # type: ignore
+import matplotlib.pyplot as plt # type: ignore
+from matplotlib.animation import FuncAnimation # type: ignore
+import astropy.units as u # type: ignore
+import astropy.constants as const # type: ignore
 from typing import Any, Tuple, List
 animate: Any = None
 
@@ -245,9 +245,9 @@ def main() -> None:
     ax1.legend()
     ax2.plot(pos_freqs.value, pos_psd, color='crimson', linewidth=2, label='Power Spectrum')
     ax2.axvline(
-        detected_charon_freq.value, 
-        color='black', 
-        linestyle=':', 
+        detected_charon_freq.value,
+        color='black',
+        linestyle=':',
         label=f'Charon Peak ({detected_charon_freq:.3f})'
     )
     ax2.set_xlim(0, 0.3)
